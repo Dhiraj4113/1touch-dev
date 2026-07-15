@@ -1,4 +1,7 @@
 import type { Service, Industry, Solution, Insight } from './types';
+import { BLOG_POSTS } from './blog-posts';
+
+export { BLOG_KEYWORDS, BLOG_POSTS, getBlogPost, getBlogPostsSorted } from './blog-posts';
 
 /** Static content — site works without backend API */
 export const SITE = {
@@ -11,6 +14,9 @@ export const SITE = {
   linkedin: 'https://linkedin.com/company/1touch-ai',
   locations: 'Global · Remote-first',
 } as const;
+
+/** @deprecated Prefer BLOG_POSTS / getBlogPostsSorted — kept for API fallbacks */
+export const STATIC_INSIGHTS: Insight[] = BLOG_POSTS;
 
 export const TECH_LOGOS = [
   'AWS', 'Azure', 'Google Cloud', 'OpenAI', 'Anthropic',
@@ -1405,111 +1411,5 @@ export const STATIC_SOLUTIONS: Solution[] = [
       "Kubernetes"
     ],
     "created_at": "2026-07-01T00:00:00.000Z"
-  }
-];
-
-export const STATIC_INSIGHTS: Insight[] = [
-  {
-    "id": 1,
-    "slug": "enterprise-llm-production-2024",
-    "title": "Deploying LLMs in Production: What Enterprises Get Wrong",
-    "excerpt": "Most enterprise LLM deployments fail not because of model quality, but because of inadequate infrastructure, evaluation frameworks, and change management.",
-    "content": "Most enterprise LLM deployments fail not because of model quality, but because of inadequate infrastructure, evaluation frameworks, and change management.\\n\\n## The Evaluation Gap\\n\\nTeams that perform well in demos frequently struggle in production because they evaluated their LLM on cherry-picked examples rather than representative real-world inputs. Production evaluation needs a diverse test set, automated metrics that correlate with business outcomes, and human review protocols.\\n\\n## Infrastructure Underinvestment\\n\\nLLMs have different infrastructure requirements than traditional software. Build LLM infrastructure as a platform capability — with prompt management, caching, fallback routing, and cost monitoring.\\n\\n## The Context Problem\\n\\nOrganizations achieving the best results invest in RAG architectures connected to internal knowledge bases, combined with domain-specific fine-tuning.\\n\\n## Change Management\\n\\nOrganizations that invest in training, escalation protocols, and feedback mechanisms achieve far higher adoption than those that simply release tools.",
-    "author": "1touch.ai Research",
-    "category": "Engineering",
-    "tags": [
-      "LLM",
-      "Production AI",
-      "Enterprise",
-      "MLOps"
-    ],
-    "published_at": "2026-07-08T00:00:00.000Z",
-    "read_time": 8,
-    "created_at": "2026-07-08T00:00:00.000Z"
-  },
-  {
-    "id": 2,
-    "slug": "ai-strategy-roi-framework",
-    "title": "A Framework for Measuring AI ROI in Enterprise Environments",
-    "excerpt": "Measuring return on AI investments requires a different approach than traditional IT ROI. This framework covers operational, capability, and strategic value horizons.",
-    "content": "The question we hear most from CFOs and CIOs: how do we know if our AI investments are working? Traditional IT ROI frameworks capture only a fraction of AI value.\\n\\n## Three Horizons of AI Value\\n\\nHorizon 1 (0–12 months): operational efficiency — processing time, error rates, headcount redeployment.\\n\\nHorizon 2 (12–36 months): capability expansion — new products, markets, and experiences.\\n\\nHorizon 3 (36+ months): strategic optionality — compounding competitive advantages from AI and data assets.\\n\\n## Common Mistakes\\n\\nThe most common mistake is measuring model accuracy rather than business outcomes. A highly accurate model in a low-value workflow creates less value than a good-enough model in a high-stakes decision process.",
-    "author": "1touch.ai Research",
-    "category": "Strategy",
-    "tags": [
-      "AI Strategy",
-      "ROI",
-      "Enterprise AI"
-    ],
-    "published_at": "2026-07-01T00:00:00.000Z",
-    "read_time": 7,
-    "created_at": "2026-07-01T00:00:00.000Z"
-  },
-  {
-    "id": 3,
-    "slug": "multi-agent-systems-enterprise",
-    "title": "Multi-Agent AI Systems: Architecture Patterns for Enterprise Scale",
-    "excerpt": "Multi-agent systems represent the next frontier of enterprise AI automation. Architecture patterns, orchestration strategies, and failure modes from production deployments.",
-    "content": "Multi-agent AI systems — networks of specialized agents that collaborate — are moving from research to production.\\n\\n## When to Use Multi-Agent\\n\\nClear advantages for: parallel execution, specialized expertise at different stages, workflows beyond a single context window, and independent verification.\\n\\n## Orchestration Patterns\\n\\nSupervisor: central orchestrator decomposes and delegates.\\nPipeline: sequential agent chains.\\nDebate: independent analysis then reconciliation.\\n\\n## Production Reliability\\n\\nAddress agent failures, loops, and context drift with circuit breakers, iteration limits, structured output validation, and comprehensive logging.",
-    "author": "1touch.ai Research",
-    "category": "Technology",
-    "tags": [
-      "Multi-Agent",
-      "AI Architecture",
-      "LangGraph"
-    ],
-    "published_at": "2026-06-23T00:00:00.000Z",
-    "read_time": 10,
-    "created_at": "2026-06-23T00:00:00.000Z"
-  },
-  {
-    "id": 4,
-    "slug": "data-engineering-ai-readiness",
-    "title": "Data Engineering for AI: Building the Foundation That Matters",
-    "excerpt": "The difference between AI projects that succeed and those that fail often comes down to data infrastructure quality.",
-    "content": "The most important part of AI is often the data pipeline. Data infrastructure quality is the strongest predictor of AI project success.\\n\\n## Feature Stores\\n\\nFeature stores prevent training-serving skew, enable feature reuse, and provide lineage for governance.\\n\\n## Real-Time vs Batch\\n\\nChoose architecture based on business latency requirements — fraud, personalization, and dynamic pricing often need real-time features.\\n\\n## Data Quality\\n\\nImplement quality checks at every pipeline stage with alerting and circuit breakers that keep bad data out of production models.",
-    "author": "1touch.ai Research",
-    "category": "Engineering",
-    "tags": [
-      "Data Engineering",
-      "MLOps",
-      "Feature Store"
-    ],
-    "published_at": "2026-06-15T00:00:00.000Z",
-    "read_time": 9,
-    "created_at": "2026-06-15T00:00:00.000Z"
-  },
-  {
-    "id": 5,
-    "slug": "computer-vision-manufacturing-2024",
-    "title": "Computer Vision in Manufacturing: From Pilot to Production",
-    "excerpt": "Industrial computer vision deployments face unique challenges that laboratory environments do not reveal.",
-    "content": "Computer vision is one of the highest-ROI AI applications in manufacturing, yet the gap between pilots and production remains wide.\\n\\n## Lighting Variability\\n\\nModels trained under controlled lighting degrade when conditions change. Production systems need controlled lighting or extensive augmentation.\\n\\n## Edge vs Cloud\\n\\nConnectivity constraints often require edge inference for real-time quality control.\\n\\n## MES Integration\\n\\nVision AI value is realized when detections trigger responses in manufacturing execution systems.\\n\\n## Continuous Improvement\\n\\nActive learning pipelines keep models current as products and processes change.",
-    "author": "1touch.ai Research",
-    "category": "Industry",
-    "tags": [
-      "Computer Vision",
-      "Manufacturing",
-      "Edge AI"
-    ],
-    "published_at": "2026-06-08T00:00:00.000Z",
-    "read_time": 8,
-    "created_at": "2026-06-08T00:00:00.000Z"
-  },
-  {
-    "id": 6,
-    "slug": "generative-ai-enterprise-governance",
-    "title": "Governing Generative AI in the Enterprise",
-    "excerpt": "As generative AI moves to production, enterprises need governance that balances innovation velocity with risk management.",
-    "content": "Inadequate GenAI governance leads to reputational and regulatory risk. Overly restrictive governance stifles innovation.\\n\\n## Four Pillars\\n\\n1. Use case classification by risk profile\\n2. Model risk management adapted for foundation models\\n3. Output monitoring for hallucinations, bias, and policy violations\\n4. Human oversight calibrated to risk\\n\\n## Organization\\n\\nGovernance requires cross-functional ownership across technology, legal, compliance, and business teams — not just a technical checklist.",
-    "author": "1touch.ai Research",
-    "category": "Strategy",
-    "tags": [
-      "Generative AI",
-      "Governance",
-      "Risk Management"
-    ],
-    "published_at": "2026-06-01T00:00:00.000Z",
-    "read_time": 7,
-    "created_at": "2026-06-01T00:00:00.000Z"
   }
 ];

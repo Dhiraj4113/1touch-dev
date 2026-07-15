@@ -145,7 +145,7 @@ export default function Footer() {
                 ['About', '/about'],
                 ['Solutions', '/solutions'],
                 ['Technology Licensing', '/licensing'],
-                ['Insights', '/insights'],
+                ['Blog', '/blog'],
                 ['Contact', '/contact'],
               ].map(([label, href]) => (
                 <li key={href}>

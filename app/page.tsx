@@ -15,8 +15,8 @@ import {
   STATIC_SERVICES,
   STATIC_INDUSTRIES,
   STATIC_SOLUTIONS,
-  STATIC_INSIGHTS,
 } from '@/src/content';
+import { getBlogPostsSorted } from '@/src/blog-posts';
 import { getServices, getIndustries, getInsights, getSolutions } from '@/src/api';
 import type { Service, Industry, Insight, Solution } from '@/src/types';
 
@@ -66,7 +66,7 @@ function StatCounter({ value, suffix, label }: { value: number; suffix: string; 
 export default function HomePage() {
   const [services, setServices] = useState<Service[]>(STATIC_SERVICES);
   const [industries, setIndustries] = useState<Industry[]>(STATIC_INDUSTRIES);
-  const [insights, setInsights] = useState<Insight[]>(STATIC_INSIGHTS.slice(0, 3));
+  const [insights, setInsights] = useState<Insight[]>(getBlogPostsSorted().slice(0, 3));
   const [solutions, setSolutions] = useState<Solution[]>(STATIC_SOLUTIONS.slice(0, 6));
 
   useEffect(() => {
@@ -74,7 +74,12 @@ export default function HomePage() {
       ([s, i, ins, sol]) => {
         if (s.length) setServices(s);
         if (i.length) setIndustries(i);
-        if (ins.length) setInsights(ins.slice(0, 3));
+        if (ins.length) {
+          const sorted = [...ins].sort(
+            (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime()
+          );
+          setInsights(sorted.slice(0, 3));
+        }
         if (sol.length) setSolutions(sol.slice(0, 6));
       }
     );
@@ -395,18 +400,18 @@ export default function HomePage() {
             }}
           >
             <div>
-              <p className="section-label">Insights</p>
+              <p className="section-label">Blog</p>
               <h2 className="section-title" style={{ marginBottom: 0 }}>
-                Enterprise AI Intelligence
+                AI Insights & Keyword Guides
               </h2>
             </div>
-            <Link href="/insights" className="btn btn-secondary">
-              View All Insights →
+            <Link href="/blog" className="btn btn-secondary">
+              View All Posts →
             </Link>
           </div>
           <div className="grid-3">
             {insights.map((insight) => (
-              <Link key={insight.id} href={`/insights/${insight.slug}`} className="insight-card">
+              <Link key={insight.id} href={`/blog/${insight.slug}`} className="insight-card">
                 <div className="insight-card-body">
                   <div className="insight-meta">
                     <span className="badge badge-cyan">{insight.category}</span>

@@ -35,9 +35,12 @@ export NEXT_PUBLIC_API_URL=http://localhost:4000
 | `/industries` | 16 industries (Football, Finance, …) |
 | `/solutions` | Pre-built AI solutions |
 | `/licensing` | Technology licensing |
-| `/insights` | Articles |
+| `/blog` | SEO blog / keyword articles |
+| `/blog/[slug]` | Blog post |
 | `/about` | Company |
 | `/contact` | Contact for pricing / details |
+
+Legacy `/insights` URLs redirect permanently to `/blog`.
 
 ## Deploy
 
