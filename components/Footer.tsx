@@ -171,8 +171,8 @@ export default function Footer() {
             © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
           </p>
           <div className="footer-legal">
-            <Link href="/contact">Privacy</Link>
-            <Link href="/contact">Terms</Link>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
             <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue-light)' }}>
               LinkedIn
             </a>
